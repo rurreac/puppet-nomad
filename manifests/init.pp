@@ -119,7 +119,9 @@ class nomad (
 
   anchor {'nomad_first': }
   ->
-  class { 'nomad::install': } ->
+  class { 'nomad::install':
+    notify => Service['nomad'],
+  } ->
   class { 'nomad::config':
     config_hash => $config_hash_real,
     purge       => $purge_config_dir,
